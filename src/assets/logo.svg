@@ -1,0 +1,6 @@
+<svg width="150" height="40" viewBox="0 0 150 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .text { font: bold 32px 'Segoe UI', sans-serif; }
+  </style>
+  <text x="0" y="30" class="text" fill="#0891b2">Bazaryo</text>
+</svg>
