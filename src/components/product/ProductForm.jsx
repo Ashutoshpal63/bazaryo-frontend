@@ -112,7 +112,7 @@ export const ProductForm = ({ onSubmit, initialData = null, isLoading = false })
 
           <div className="flex gap-4">
             <Input
-              label="Price ($)"
+              label="Price (₹)"
               id="price"
               type="number"
               register={register}

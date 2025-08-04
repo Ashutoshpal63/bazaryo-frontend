@@ -102,7 +102,7 @@ export const ManageProductsPage = () => {
         </div>
       )
     },
-    { header: 'Price', accessor: 'price', Cell: ({ row }) => `$${row.price.toFixed(2)}` },
+    { header: 'Price', accessor: 'price', Cell: ({ row }) => `₹${row.price.toFixed(2)}` },
     { header: 'Stock', accessor: 'quantityAvailable' },
     {
       header: 'Actions',

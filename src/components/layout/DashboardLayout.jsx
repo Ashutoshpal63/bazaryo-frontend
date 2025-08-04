@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/logo.svg';
-import { FaTachometerAlt, FaBoxOpen, FaClipboardList, FaUsers, FaStore, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { FaTachometerAlt, FaBoxOpen, FaClipboardList, FaUsers, FaStore, FaSignOutAlt, FaBars, FaTimes,FaCog } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const dashboardLinks = {
@@ -16,6 +16,7 @@ const dashboardLinks = {
     { to: '/shopkeeper/dashboard', icon: FaTachometerAlt, text: 'Dashboard' },
     { to: '/shopkeeper/products', icon: FaBoxOpen, text: 'My Products' },
     { to: '/shopkeeper/orders', icon: FaClipboardList, text: 'My Orders' },
+    { to: '/shopkeeper/shop', icon: FaCog, text: 'Manage Shop' },
   ],
   delivery_agent: [
     { to: '/delivery/dashboard', icon: FaTachometerAlt, text: 'Dashboard' },

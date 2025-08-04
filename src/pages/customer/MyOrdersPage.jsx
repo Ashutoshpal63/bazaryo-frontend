@@ -123,7 +123,7 @@ export const MyOrdersPage = () => {
                 </div>
                 <div className="col-span-1">
                   <p className="text-sm font-semibold text-slate-800">Total</p>
-                  <p className="text-lg font-bold text-slate-900">${order.totalAmount.toFixed(2)}</p>
+                  <p className="text-lg font-bold text-slate-900">₹{order.totalAmount.toFixed(2)}</p>
                 </div>
                 <div className="col-span-1 flex flex-col items-start sm:items-end space-y-2">
                   <div className={getStatusPill(order.status)}>

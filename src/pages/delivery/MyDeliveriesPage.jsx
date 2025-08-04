@@ -123,7 +123,7 @@ export const MyDeliveriesPage = () => {
                   {/* Actions */}
                   <div className="flex flex-col justify-between space-y-3">
                     <div className="text-right">
-                       <p className="text-lg font-bold text-slate-800">${order.totalAmount.toFixed(2)}</p>
+                       <p className="text-lg font-bold text-slate-800">₹{order.totalAmount.toFixed(2)}</p>
                        <p className="text-xs font-semibold text-blue-600">{order.status.replace(/_/g, ' ')}</p>
                     </div>
                     <div className="flex flex-col space-y-2">

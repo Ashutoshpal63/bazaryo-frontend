@@ -14,47 +14,30 @@ export const Footer = () => {
     { icon: Linkedin, href: '#', label: 'LinkedIn' }
   ];
 
+  // --- Shortened footer sections ---
   const footerSections = [
     {
-      title: 'Quick Links',
+      title: 'Navigation',
       links: [
         { to: '/products', label: 'All Products' },
         { to: '/my-orders', label: 'My Orders' },
         { to: '/cart', label: 'Shopping Cart' },
-        { to: '/wishlist', label: 'Wishlist' }
+        { to: '/#', label: 'Become a Partner' },
       ]
     },
     {
-      title: 'For Partners',
-      links: [
-        { href: '#', label: 'Become a Shopkeeper' },
-        { href: '#', label: 'Join as Delivery Agent' },
-        { href: '#', label: 'Partner Dashboard' },
-        { href: '#', label: 'API Documentation' }
-      ]
-    },
-    {
-      title: 'Support',
+      title: 'Resources',
       links: [
         { href: '#', label: 'Help Center' },
         { href: '#', label: 'Contact Us' },
-        { href: '#', label: 'Live Chat' },
-        { href: '#', label: 'Community' }
-      ]
-    },
-    {
-      title: 'Legal',
-      links: [
         { href: '#', label: 'Privacy Policy' },
         { href: '#', label: 'Terms of Service' },
-        { href: '#', label: 'Cookie Policy' },
-        { href: '#', label: 'Refund Policy' }
       ]
     }
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+    <footer className="relative bg-slate-900 text-white overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(14,165,233,0.1),transparent_50%)]" />
@@ -62,9 +45,9 @@ export const Footer = () => {
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
         <div className="py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Brand section */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -80,9 +63,9 @@ export const Footer = () => {
                   </span>
                 </div>
                 
-                <p className="text-slate-300 text-lg leading-relaxed max-w-md">
-                  Your daily needs, delivered instantly from local stores. 
-                  Experience the future of neighborhood shopping.
+                {/* --- Shortened description --- */}
+                <p className="text-slate-300 leading-relaxed max-w-md">
+                  Your favorite local stores, delivered instantly.
                 </p>
                 
                 <div className="flex space-x-4">
@@ -103,7 +86,7 @@ export const Footer = () => {
             </div>
 
             {/* Links sections */}
-            <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-8">
               {footerSections.map((section, index) => (
                 <motion.div
                   key={section.title}
@@ -137,20 +120,7 @@ export const Footer = () => {
                   </ul>
                 </motion.div>
               ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom section */}
-        <div className="border-t border-slate-700/50 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-2 text-slate-400 text-sm">
-              <span>© {new Date().getFullYear()} Bazaryo. Made with</span>
-              <Heart className="w-4 h-4 text-red-400 fill-current" />
-              <span>for local communities.</span>
-            </div>
-            
-            <motion.button
+              <motion.button
               onClick={scrollToTop}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -159,8 +129,11 @@ export const Footer = () => {
               <span>Back to top</span>
               <ArrowUp className="w-4 h-4" />
             </motion.button>
+            </div>
           </div>
         </div>
+
+        
       </div>
     </footer>
   );

@@ -126,41 +126,6 @@ const StepCard = ({ step, title, description, icon: Icon, gradient, delay = 0 })
   );
 };
 
-// Testimonial Card Component
-const TestimonialCard = ({ name, role, content, avatar, rating, delay = 0 }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: delay * 0.1 }}
-      viewport={{ once: true }}
-    >
-      <Card className="p-8 h-full bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/50">
-        <div className="flex items-center mb-4">
-          {[...Array(5)].map((_, i) => (
-            <Star 
-              key={i} 
-              className={`w-5 h-5 ${i < rating ? 'text-yellow-400 fill-current' : 'text-slate-300'}`} 
-            />
-          ))}
-        </div>
-        <p className="text-slate-600 mb-6 leading-relaxed italic">
-          "{content}"
-        </p>
-        <div className="flex items-center">
-          <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-            {name.charAt(0)}
-          </div>
-          <div>
-            <h4 className="font-semibold text-slate-800">{name}</h4>
-            <p className="text-sm text-slate-500">{role}</p>
-          </div>
-        </div>
-      </Card>
-    </motion.div>
-  );
-};
-
 export const HomePage = () => {
   const features = [
     {
@@ -198,27 +163,6 @@ export const HomePage = () => {
       title: "Quality Assured",
       description: "Every product is carefully selected and quality-checked by our partner stores before it reaches your doorstep.",
       gradient: "bg-gradient-to-br from-violet-500 to-purple-600"
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Busy Mom",
-      content: "Bazaryo has been a lifesaver! I can get fresh groceries delivered while managing my kids' schedules. The local stores have amazing quality.",
-      rating: 5
-    },
-    {
-      name: "Mike Chen",
-      role: "Small Business Owner",
-      content: "As a local shop owner, Bazaryo helped me reach more customers during tough times. The platform is easy to use and the support is excellent.",
-      rating: 5
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "College Student",
-      content: "Perfect for late-night study sessions! I can order snacks and essentials without leaving my dorm. Fast delivery and great prices.",
-      rating: 5
     }
   ];
 
@@ -311,54 +255,6 @@ export const HomePage = () => {
             </Button>
           </motion.div>
 
-          {/* Trust Indicators */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-wrap justify-center items-center gap-8 text-slate-500"
-          >
-            <div className="flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-slate-200/50">
-              <Star className="w-5 h-5 text-yellow-500 mr-2 fill-current" />
-              <span className="font-semibold">4.8/5 Rating</span>
-            </div>
-            <div className="flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-slate-200/50">
-              <Shield className="w-5 h-5 text-cyan-500 mr-2" />
-              <span className="font-semibold">Secure Payments</span>
-            </div>
-            <div className="flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-slate-200/50">
-              <Clock className="w-5 h-5 text-blue-500 mr-2" />
-              <span className="font-semibold">30min Delivery</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <motion.div
-          className="absolute inset-0 opacity-20"
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%'],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-          style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-        />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <StatCard number="50K+" label="Happy Customers" icon={Users} delay={0} />
-            <StatCard number="500+" label="Local Partners" icon={Heart} delay={1} />
-            <StatCard number="10K+" label="Products Available" icon={Package} delay={2} />
-            <StatCard number="30min" label="Average Delivery" icon={Zap} delay={3} />
-          </div>
         </div>
       </section>
 
@@ -448,36 +344,6 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">
-              What Our Customers Say
-            </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Join thousands of satisfied customers who trust Bazaryo for their daily needs.
-            </p>
-          </motion.div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard 
-                key={testimonial.name}
-                {...testimonial}
-                delay={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Community Impact Section */}
       <section className="relative py-24 bg-slate-800 overflow-hidden">
         <div 
@@ -518,44 +384,6 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-cyan-600 to-blue-600">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-white"
-          >
-            <Sparkles className="w-16 h-16 mx-auto mb-6 text-cyan-200" />
-            <h2 className="text-3xl md:text-4xl font-black mb-6">
-              Ready to Transform Your Shopping Experience?
-            </h2>
-            <p className="text-xl text-cyan-100 mb-8 leading-relaxed">
-              Join thousands of happy customers and start enjoying the convenience of local delivery today.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                variant="secondary" 
-                size="lg" 
-                icon={ArrowRight}
-                className="bg-white text-cyan-600 hover:bg-cyan-50 text-lg px-8 py-4"
-              >
-                Start Shopping Now
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                icon={Globe}
-                className="border-white text-white hover:bg-white hover:text-cyan-600 text-lg px-8 py-4"
-              >
-                Learn More
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       <Footer />
     </div>

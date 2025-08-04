@@ -130,9 +130,9 @@ export const OrderTrackingPage = () => {
                   <li key={item.productId} className="py-3 flex justify-between">
                     <div>
                       <p className="font-semibold">{item.name}</p>
-                      <p className="text-sm text-slate-500">{item.quantity} x ${item.price.toFixed(2)}</p>
+                      <p className="text-sm text-slate-500">{item.quantity} x ₹{item.price.toFixed(2)}</p>
                     </div>
-                    <p className="font-semibold">${(item.quantity * item.price).toFixed(2)}</p>
+                    <p className="font-semibold">₹{(item.quantity * item.price).toFixed(2)}</p>
                   </li>
                 ))}
               </ul>

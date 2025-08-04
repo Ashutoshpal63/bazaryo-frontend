@@ -65,7 +65,7 @@ export const ProductDetailsPage = () => {
               <span>{product.shopId.name}</span>
             </Link>
 
-            <p className="text-3xl font-bold text-slate-800 my-6">${product.price.toFixed(2)}</p>
+            <p className="text-3xl font-bold text-slate-800 my-6">₹{product.price.toFixed(2)}</p>
             
             <p className="text-slate-600 leading-relaxed mb-8">{product.description}</p>
             

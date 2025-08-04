@@ -126,7 +126,7 @@ export const CartPage = () => {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-slate-600">Subtotal</span>
-                  <span className="font-semibold">${cartTotal.toFixed(2)}</span>
+                  <span className="font-semibold">₹{cartTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-600">Delivery Fee</span>
@@ -134,7 +134,7 @@ export const CartPage = () => {
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-4 border-t mt-4">
                   <span>Grand Total</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
               </div>
               

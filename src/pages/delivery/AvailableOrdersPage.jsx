@@ -65,7 +65,7 @@ export const AvailableOrdersPage = () => {
               <div>
                 <div className="flex justify-between items-start mb-3">
                   <p className="font-mono text-xs text-slate-500">ID: {order._id.slice(-8)}</p>
-                  <p className="font-bold text-lg text-green-600">${order.totalAmount.toFixed(2)}</p>
+                  <p className="font-bold text-lg text-green-600">₹{order.totalAmount.toFixed(2)}</p>
                 </div>
                 <div className="mb-4">
                   <div className="flex items-center text-slate-700 mb-2">

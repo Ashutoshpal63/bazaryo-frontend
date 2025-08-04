@@ -27,11 +27,13 @@ import { RegisterPage } from './pages/auth/RegisterPage';
 import { CartPage } from './pages/customer/CartPage';
 import { MyOrdersPage } from './pages/customer/MyOrdersPage';
 import { OrderTrackingPage } from './pages/customer/OrderTrackingPage';
+import { ProfilePage } from './pages/customer/ProfilePage';
 
 // Shopkeeper Pages
 import { ShopkeeperDashboard } from './pages/shopkeeper/ShopkeeperDashboard';
 import { ManageProductsPage } from './pages/shopkeeper/ManageProductsPage';
 import { ShopOrdersPage } from './pages/shopkeeper/ShopOrdersPage';
+import { ManageShopPage } from './pages/shopkeeper/ManageShopPage';
 
 // Delivery Agent Pages
 import { DeliveryDashboard } from './pages/delivery/DeliveryDashboard';
@@ -87,6 +89,7 @@ function App() {
               <Route element={<MainLayout />}>
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/my-orders" element={<MyOrdersPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
                 {/* Note: Tracking page is shared but defined here for customer access */}
                 <Route path="/orders/:id/track" element={<OrderTrackingPage />} />
               </Route>
@@ -99,6 +102,7 @@ function App() {
                 <Route path="dashboard" element={<ShopkeeperDashboard />} />
                 <Route path="products" element={<ManageProductsPage />} />
                 <Route path="orders" element={<ShopOrdersPage />} />
+                <Route path="shop" element={<ManageShopPage />} />
               </Route>
             </Route>
             

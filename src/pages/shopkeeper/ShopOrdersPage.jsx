@@ -56,7 +56,7 @@ export const ShopOrdersPage = () => {
     { header: 'Order ID', accessor: '_id', Cell: ({ row }) => <span className="font-mono text-xs">{row._id.slice(-8)}...</span> },
     { header: 'Customer', accessor: 'userId.name', Cell: ({ row }) => row.userId?.name || 'N/A' },
     { header: 'Date', accessor: 'createdAt', Cell: ({ row }) => new Date(row.createdAt).toLocaleDateString() },
-    { header: 'Total', accessor: 'totalAmount', Cell: ({ row }) => `$${row.totalAmount.toFixed(2)}` },
+    { header: 'Total', accessor: 'totalAmount', Cell: ({ row }) => `₹${row.totalAmount.toFixed(2)}` },
     {
       header: 'Status',
       accessor: 'status',

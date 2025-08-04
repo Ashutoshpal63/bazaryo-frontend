@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-// --- THIS IS THE CORRECTED LINE ---
 import { FaShoppingCart, FaShoppingBag, FaStore, FaTruck, FaCog, FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
 import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/logo.svg';
@@ -72,7 +71,12 @@ export const Navbar = () => {
                 </button>
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
                   <div className="py-1">
-                    {/* Add profile link here later if needed */}
+                    {/* --- CORRECTED DROPDOWN --- */}
+                    {user.role === 'customer' && (
+                        <Link to="/profile" className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">
+                            My Profile
+                        </Link>
+                    )}
                     <button onClick={logout} className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Logout</button>
                   </div>
                 </div>
@@ -110,7 +114,15 @@ export const Navbar = () => {
               {renderRoleLinks(true)}
               <div className="pt-4 border-t border-slate-200">
                 {isAuthenticated ? (
-                  <Button onClick={() => { logout(); setMobileMenuOpen(false); }} className="w-full">Logout</Button>
+                    <div className="space-y-2">
+                        {/* --- CORRECTED MOBILE MENU --- */}
+                        {user.role === 'customer' && (
+                            <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="w-full">
+                                <Button variant="ghost" className="w-full">My Profile</Button>
+                            </Link>
+                        )}
+                        <Button onClick={() => { logout(); setMobileMenuOpen(false); }} className="w-full" variant="secondary">Logout</Button>
+                    </div>
                 ) : (
                   <div className="flex gap-3">
                     <Link to="/login" className="w-full"><Button variant="ghost" className="w-full">Login</Button></Link>
