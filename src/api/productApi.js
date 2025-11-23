@@ -41,9 +41,13 @@ export const createProduct = async (formData) => {
  * @returns {Promise<object>} The updated product data.
  */
 export const updateProduct = async (productId, productData) => {
-  // Note: Your backend expects JSON here, not FormData, unless you're updating the image.
-  // If updating images, this would need to be FormData similar to createProduct.
-  const { data } = await api.put(`/products/${productId}`, productData);
+  // Send multipart/form-data when productData is a FormData (for image updates),
+  // otherwise send JSON so numeric fields (like quantityAvailable) are preserved.
+  const isForm = productData instanceof FormData;
+  const config = isForm
+    ? { headers: { 'Content-Type': 'multipart/form-data' } }
+    : {};
+  const { data } = await api.put(`/products/${productId}`, productData, config);
   return data;
 };
 

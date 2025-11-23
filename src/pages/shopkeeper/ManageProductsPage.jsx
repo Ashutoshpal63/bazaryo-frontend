@@ -7,7 +7,7 @@ import { Button } from '../../components/common/Button';
 import { Modal } from '../../components/common/Modal';
 import { ProductForm } from '../../components/product/ProductForm';
 import { Alert } from '../../components/common/Alert';
-import { FaPlusCircle, FaPen, FaTrash } from 'react-icons/fa';
+import { FaPlus, FaPen, FaTimes } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 export const ManageProductsPage = () => {
@@ -18,6 +18,11 @@ export const ManageProductsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // For quick stock adjustments
+  const [isStockModalOpen, setIsStockModalOpen] = useState(false);
+  const [stockModalProduct, setStockModalProduct] = useState(null);
+  const [stockAmount, setStockAmount] = useState(1);
+  const [isStockSubmitting, setIsStockSubmitting] = useState(false);
 
   const fetchProducts = useCallback(async () => {
     if (!user) return; // Wait for user object to be available
@@ -105,12 +110,32 @@ export const ManageProductsPage = () => {
     { header: 'Price', accessor: 'price', Cell: ({ row }) => `₹${row.price.toFixed(2)}` },
     { header: 'Stock', accessor: 'quantityAvailable' },
     {
+      header: 'Adjust',
+      accessor: 'adjust',
+      Cell: ({ row }) => (
+        <div className="flex">
+          <Button
+            size="sm"
+            variant="primary"
+            className="p-2 h-8 w-8"
+            onClick={() => { setStockModalProduct(row); setStockAmount(1); setIsStockModalOpen(true); }}
+            aria-label={`Add stock to ${row.name}`}
+            title="Add stock"
+          >
+            <FaPlus />
+          </Button>
+        </div>
+      )
+    },
+    {
       header: 'Actions',
       accessor: '_id',
       Cell: ({ row }) => (
         <div className="flex space-x-2">
           <Button size="sm" variant="ghost" className="p-2 h-8 w-8" onClick={() => handleEditProduct(row)}><FaPen /></Button>
-          <Button size="sm" variant="danger" className="p-2 h-8 w-8" onClick={() => handleDeleteProduct(row._id)}><FaTrash /></Button>
+          <Button size="sm" variant="danger" className="p-2 h-8 w-8" onClick={() => handleDeleteProduct(row._id)} aria-label={`Delete ${row.name}`} title="Delete">
+            <FaTimes />
+          </Button>
         </div>
       )
     }
@@ -120,7 +145,7 @@ export const ManageProductsPage = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-slate-800">My Products</h1>
-        <Button onClick={handleAddProduct} icon={FaPlusCircle} disabled={!!error}>
+        <Button onClick={handleAddProduct} icon={FaPlus} disabled={!!error}>
           Add Product
         </Button>
       </div>
@@ -141,6 +166,56 @@ export const ManageProductsPage = () => {
           initialData={editingProduct}
           isLoading={isSubmitting}
         />
+      </Modal>
+
+      {/* Stock adjustment modal */}
+      <Modal
+        isOpen={isStockModalOpen}
+        onClose={() => setIsStockModalOpen(false)}
+        title={stockModalProduct ? `Add Stock — ${stockModalProduct.name}` : 'Add Stock'}
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-slate-600">Current stock: <span className="font-semibold">{stockModalProduct?.quantityAvailable ?? '-'}</span></p>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Add quantity</label>
+            <input
+              type="number"
+              min="1"
+              value={stockAmount}
+              onChange={(e) => setStockAmount(Number(e.target.value))}
+              className="w-full px-4 py-2 rounded-md border border-slate-200"
+            />
+          </div>
+
+          <div className="flex justify-end space-x-3 pt-2">
+            <Button variant="ghost" onClick={() => setIsStockModalOpen(false)}>Cancel</Button>
+            <Button
+              onClick={async () => {
+                if (!stockModalProduct) return;
+                const add = Number(stockAmount) || 0;
+                if (add <= 0) {
+                  toast.error('Enter a valid quantity to add');
+                  return;
+                }
+                setIsStockSubmitting(true);
+                try {
+                  const newQty = (stockModalProduct.quantityAvailable || 0) + add;
+                  await updateProduct(stockModalProduct._id, { quantityAvailable: newQty });
+                  toast.success('Stock updated');
+                  setIsStockModalOpen(false);
+                  fetchProducts();
+                } catch (err) {
+                  toast.error(err.response?.data?.message || 'Failed to update stock');
+                } finally {
+                  setIsStockSubmitting(false);
+                }
+              }}
+              disabled={isStockSubmitting}
+            >
+              {isStockSubmitting ? 'Updating...' : 'Add'}
+            </Button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

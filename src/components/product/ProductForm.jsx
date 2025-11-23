@@ -48,18 +48,30 @@ export const ProductForm = ({ onSubmit, initialData = null, isLoading = false })
   }, [productImage]);
 
   const onFormSubmit = (data) => {
-    // Construct FormData to handle file upload
-    const formData = new FormData();
-    Object.keys(data).forEach(key => {
-      // If the field is the file input and a file is selected, append the file
-      if (key === 'productImage' && data.productImage && data.productImage[0]) {
-        formData.append(key, data.productImage[0]);
-      } else if (key !== 'productImage') {
-        // Otherwise, append the text value
-        formData.append(key, data[key]);
-      }
-    });
-    onSubmit(formData);
+    // If a file was selected, send multipart/form-data. Otherwise send JSON
+    const fileSelected = data.productImage && data.productImage[0];
+    if (fileSelected) {
+      const formData = new FormData();
+      Object.keys(data).forEach(key => {
+        if (key === 'productImage' && data.productImage && data.productImage[0]) {
+          formData.append(key, data.productImage[0]);
+        } else if (key !== 'productImage') {
+          formData.append(key, data[key]);
+        }
+      });
+      onSubmit(formData);
+    } else {
+      // Build plain object and coerce numeric fields so backend receives numbers
+      const payload = {
+        ...data,
+      };
+      // Remove productImage field when no file provided
+      delete payload.productImage;
+      // Coerce numeric fields explicitly
+      if (payload.price !== undefined && payload.price !== '') payload.price = Number(payload.price);
+      if (payload.quantityAvailable !== undefined && payload.quantityAvailable !== '') payload.quantityAvailable = Number(payload.quantityAvailable);
+      onSubmit(payload);
+    }
   };
 
   const clearImage = () => {

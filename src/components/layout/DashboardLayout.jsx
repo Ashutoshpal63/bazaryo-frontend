@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Outlet, NavLink, Link } from 'react-router-dom';
+import { Outlet, NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/logo.svg';
-import { FaTachometerAlt, FaBoxOpen, FaClipboardList, FaUsers, FaStore, FaSignOutAlt, FaBars, FaTimes,FaCog } from 'react-icons/fa';
+import { FaTachometerAlt, FaBoxOpen, FaClipboardList, FaUsers, FaStore, FaSignOutAlt, FaBars, FaTimes, FaCog } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const dashboardLinks = {
@@ -70,6 +70,7 @@ const SidebarContent = ({ user, logout }) => {
 
 export const DashboardLayout = () => {
   const { user, logout } = useAuth();
+  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
