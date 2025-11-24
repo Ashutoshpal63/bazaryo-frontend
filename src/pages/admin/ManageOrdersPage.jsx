@@ -5,13 +5,13 @@ import { assignAgentToOrder } from '../../api/orderApi';
 import { Table } from '../../components/common/Table';
 import { Button } from '../../components/common/Button';
 import { Modal } from '../../components/common/Modal';
-import { ShoppingCart, User, Store, Truck, DollarSign, Calendar, UserPlus } from 'lucide-react';
+import { ShoppingCart, User, Store, Truck, IndianRupee, Calendar, UserPlus } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export const ManageOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // --- STATE FOR MODAL AND AGENT ASSIGNMENT ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [availableAgents, setAvailableAgents] = useState([]);
@@ -35,7 +35,7 @@ export const ManageOrdersPage = () => {
   useEffect(() => {
     fetchOrders();
   }, [fetchOrders]);
-  
+
   // --- FUNCTION TO OPEN THE MODAL AND FETCH AGENTS ---
   const openAssignModal = async (order) => {
     setSelectedOrder(order);
@@ -66,7 +66,7 @@ export const ManageOrdersPage = () => {
   };
 
   const getStatusColor = (status) => {
-    switch(status) {
+    switch (status) {
       case 'DELIVERED': return 'bg-gradient-to-r from-green-100 to-green-200 text-green-800';
       case 'PENDING_APPROVAL': return 'bg-gradient-to-r from-yellow-100 to-yellow-200 text-yellow-800';
       case 'PROCESSING': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800';
@@ -76,7 +76,7 @@ export const ManageOrdersPage = () => {
       default: return 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-800';
     }
   }
-  
+
   const columns = useMemo(() => [
     {
       header: 'Order',
@@ -132,7 +132,7 @@ export const ManageOrdersPage = () => {
       accessor: 'totalAmount',
       Cell: ({ row }) => (
         <div className="flex items-center space-x-2">
-          <DollarSign className="h-4 w-4 text-green-500" />
+          <IndianRupee className="h-4 w-4 text-green-500" />
           <span className="font-semibold text-green-600">₹{row.totalAmount.toFixed(2)}</span>
         </div>
       )
@@ -151,8 +151,8 @@ export const ManageOrdersPage = () => {
       accessor: 'actions',
       Cell: ({ row }) => (
         row.status === 'PROCESSING' && !row.deliveryAgentId ? (
-          <Button 
-            size="sm" 
+          <Button
+            size="sm"
             onClick={() => openAssignModal(row)}
             className="flex items-center space-x-2"
           >
@@ -204,7 +204,7 @@ export const ManageOrdersPage = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Table Section */}
       <Table columns={columns} data={orders} isLoading={loading} />
 
@@ -216,11 +216,11 @@ export const ManageOrdersPage = () => {
             <p className="font-mono text-sm text-gray-600">#{selectedOrder?._id.slice(-8)}</p>
           </div>
         </div>
-        
+
         {availableAgents.length > 0 ? (
           <div className="space-y-3 max-h-60 overflow-y-auto">
             {availableAgents.map(agent => (
-              <button 
+              <button
                 key={agent._id}
                 onClick={() => handleAssignAgent(agent._id)}
                 disabled={isAssigning}

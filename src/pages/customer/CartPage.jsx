@@ -44,10 +44,10 @@ export const CartPage = () => {
     try {
       await createOrdersFromCart();
       toast.success('All orders placed successfully!');
-      
+
       // Navigate to My Orders page to see all new orders
       navigate(`/my-orders`);
-      
+
       // Refresh the cart context to clear it out
       await fetchCart();
 
@@ -101,12 +101,12 @@ export const CartPage = () => {
                       <div className="ml-4 flex-1">
                         <h3 className="text-md font-semibold text-slate-800">{item.productId.name}</h3>
                         <p className="text-sm text-slate-500">
-                          {item.quantity} x ${item.productId.price.toFixed(2)}
+                          {item.quantity} x ₹{item.productId.price.toFixed(2)}
                         </p>
                       </div>
                       <div className="flex items-center">
                         <p className="text-md font-semibold text-slate-900 mr-4">
-                          ${(item.quantity * item.productId.price).toFixed(2)}
+                          ₹{(item.quantity * item.productId.price).toFixed(2)}
                         </p>
                         <button onClick={() => removeFromCart(item.productId._id)} className="text-slate-400 hover:text-red-500">
                           <FaTrash />
@@ -137,10 +137,10 @@ export const CartPage = () => {
                   <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
               </div>
-              
+
               {/* --- CORRECTED UI: The new unified checkout button --- */}
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="w-full mt-6"
                 onClick={handleCheckoutAll}
                 disabled={isCheckingOut}

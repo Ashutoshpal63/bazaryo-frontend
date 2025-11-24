@@ -12,12 +12,12 @@ import { motion } from 'framer-motion';
 import { ShoppingBag, Mail, Lock, ArrowRight, Store, Smile, Bike } from 'lucide-react';
 
 const getDashboardPath = (role) => {
-    switch (role) {
-        case 'admin': return '/admin/dashboard';
-        case 'shopkeeper': return '/shopkeeper/dashboard';
-        case 'delivery_agent': return '/delivery/dashboard';
-        default: return '/';
-    }
+  switch (role) {
+    case 'admin': return '/admin/dashboard';
+    case 'shopkeeper': return '/shopkeeper/dashboard';
+    case 'delivery_agent': return '/delivery/dashboard';
+    default: return '/';
+  }
 };
 
 export const LoginPage = () => {
@@ -61,9 +61,9 @@ export const LoginPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50 flex flex-col">
       <Navbar />
-      
+
       {/* --- FIX: Removed 'items-center' to allow content to align to the top --- */}
-      <div className="flex-1 flex justify-center py-12 px-4">
+      <div className="flex-1 flex justify-center pt-24 pb-12 px-4">
         {/* This 'items-center' correctly aligns the two columns with each other */}
         <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Welcome Content */}
@@ -87,24 +87,24 @@ export const LoginPage = () => {
             </div>
 
             <div className="space-y-6 pt-8 border-t border-slate-200/50">
-                <h3 className="text-xl font-semibold text-slate-700 text-center">Why You'll Love Shopping With Us</h3>
-                <div className="grid grid-cols-1 gap-6">
+              <h3 className="text-xl font-semibold text-slate-700 text-center">Why You'll Love Shopping With Us</h3>
+              <div className="grid grid-cols-1 gap-6">
                 {benefits.map((benefit, index) => (
-                    <motion.div
+                  <motion.div
                     key={benefit.title}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 + index * 0.15 }}
                     className="flex items-center space-x-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-slate-200/50"
-                    >
+                  >
                     <benefit.icon className="h-10 w-10 text-cyan-600 flex-shrink-0" />
                     <div>
-                        <h4 className="font-bold text-slate-800">{benefit.title}</h4>
-                        <p className="text-sm text-slate-600">{benefit.desc}</p>
+                      <h4 className="font-bold text-slate-800">{benefit.title}</h4>
+                      <p className="text-sm text-slate-600">{benefit.desc}</p>
                     </div>
-                    </motion.div>
+                  </motion.div>
                 ))}
-                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -127,7 +127,7 @@ export const LoginPage = () => {
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                     <Input label="Email Address" id="email" type="email" register={register} validation={{ required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" } }} error={errors.email} placeholder="you@example.com" className="pl-10" />
                   </div>
-                  
+
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                     <Input label="Password" id="password" type="password" register={register} validation={{ required: 'Password is required' }} error={errors.password} placeholder="••••••••" className="pl-10" />

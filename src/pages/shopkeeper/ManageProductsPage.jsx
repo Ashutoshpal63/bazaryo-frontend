@@ -26,11 +26,11 @@ export const ManageProductsPage = () => {
 
   const fetchProducts = useCallback(async () => {
     if (!user) return; // Wait for user object to be available
-    
+
     if (!user.shop) {
       setLoading(false);
       if (user.role === 'shopkeeper') {
-          setError("Your user account is not linked to a shop. Please contact support.");
+        setError("Your user account is not linked to a shop. Please contact support.");
       }
       return;
     }
@@ -92,7 +92,7 @@ export const ManageProductsPage = () => {
       setIsSubmitting(false);
     }
   };
-  
+
   const columns = useMemo(() => [
     {
       header: 'Product',
@@ -117,12 +117,12 @@ export const ManageProductsPage = () => {
           <Button
             size="sm"
             variant="primary"
-            className="p-2 h-8 w-8"
+            className="p-2 rounded-full"
             onClick={() => { setStockModalProduct(row); setStockAmount(1); setIsStockModalOpen(true); }}
             aria-label={`Add stock to ${row.name}`}
             title="Add stock"
           >
-            <FaPlus />
+            <FaPlus className="text-white" />
           </Button>
         </div>
       )
@@ -132,9 +132,11 @@ export const ManageProductsPage = () => {
       accessor: '_id',
       Cell: ({ row }) => (
         <div className="flex space-x-2">
-          <Button size="sm" variant="ghost" className="p-2 h-8 w-8" onClick={() => handleEditProduct(row)}><FaPen /></Button>
-          <Button size="sm" variant="danger" className="p-2 h-8 w-8" onClick={() => handleDeleteProduct(row._id)} aria-label={`Delete ${row.name}`} title="Delete">
-            <FaTimes />
+          <Button size="sm" variant="ghost" className="p-2 rounded-full" onClick={() => handleEditProduct(row)} title="Edit">
+            <FaPen className="text-slate-600" />
+          </Button>
+          <Button size="sm" variant="danger" className="p-2 rounded-full" onClick={() => handleDeleteProduct(row._id)} aria-label={`Delete ${row.name}`} title="Delete">
+            <FaTimes className="text-white" />
           </Button>
         </div>
       )
@@ -149,19 +151,19 @@ export const ManageProductsPage = () => {
           Add Product
         </Button>
       </div>
-      
+
       {error ? (
         <Alert type="error" title="Cannot Manage Products" message={error} />
       ) : (
         <Table columns={columns} data={products} isLoading={loading} />
       )}
 
-      <Modal 
+      <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title={editingProduct ? 'Edit Product' : 'Add New Product'}
       >
-        <ProductForm 
+        <ProductForm
           onSubmit={handleFormSubmit}
           initialData={editingProduct}
           isLoading={isSubmitting}
